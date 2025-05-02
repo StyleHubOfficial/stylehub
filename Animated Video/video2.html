@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TALENT HUB - Design Revolution</title>
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500&display=swap');
+        
+        :root {
+            --cyber-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --matrix-green: #00ff4c;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        #cinematic-container {
+            position: relative;
+            height: 100vh;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        }
+
+        .hologram-text {
+            position: absolute;
+            font-size: 8vw;
+            text-transform: uppercase;
+            text-shadow: 0 0 30px var(--cyber-blue);
+            opacity: 0;
+            transform: scale(5);
+            filter: blur(20px);
+            animation: textReveal 2.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes textReveal {
+            0% { opacity: 0; transform: scale(5); filter: blur(20px); }
+            100% { opacity: 1; transform: scale(1); filter: blur(0); }
+        }
+
+        .particle-overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .cyber-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .hologram-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                var(--cyber-blue) 0%, 
+                var(--neon-pink) 50%, 
+                var(--matrix-green) 100%);
+            mix-blend-mode: screen;
+            opacity: 0.1;
+        }
+
+        #dynamic-images {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .design-image {
+            position: absolute;
+            border: 3px solid var(--cyber-blue);
+            box-shadow: 0 0 50px var(--cyber-blue);
+            transform: rotate(45deg) scale(0);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="cinematic-container">
+        <div class="cyber-grid"></div>
+        <div class="hologram-effect"></div>
+        <div class="particle-overlay" id="particles"></div>
+        
+        <!-- Text Sequence -->
+        <div class="hologram-text" id="text1" style="left:20%;top:30%">UNLEASH</div>
+        <div class="hologram-text" id="text2" style="right:15%;top:45%">CREATIVITY</div>
+        <div class="hologram-text" id="text3" style="left:10%;top:60%">WITH</div>
+        <div class="hologram-text" id="text4" style="right:20%;top:75%">POWER</div>
+
+        <!-- Dynamic Images -->
+        <div id="dynamic-images">
+            <img src="design1.jpg" class="design-image" style="left:10%;top:10%">
+            <img src="design2.jpg" class="design-image" style="left:50%;top:30%">
+            <img src="design3.jpg" class="design-image" style="right:10%;top:50%">
+        </div>
+    </div>
+
+    <!-- Audio Track -->
+    <audio id="thrillerAudio" loop>
+        <source src="https://assets.mixkit.co/active_storage/sfx/3003/3003-preview.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
+
+    <script>
+        // AUDIO ENGINE
+        const audio = new Howl({
+            src: ['https://assets.mixkit.co/active_storage/sfx/3003/3003-preview.mp3'],
+            autoplay: true,
+            loop: true,
+            volume: 0.7,
+            onplay: () => startAnimations()
+        });
+
+        // ANIMATION TIMELINE
+        const tl = gsap.timeline({paused: true});
+
+        // TEXT ANIMATION SEQUENCE
+        tl.to("#text1", {opacity: 1, duration: 2, ease: "power4.out"}, 0)
+          .to("#text1", {textShadow: "0 0 50px var(--neon-pink)", duration: 1}, 2)
+          .to("#text2", {opacity: 1, duration: 2, ease: "elastic.out(1, 0.3)"}, 2.5)
+          .to("#text3", {opacity: 1, duration: 1.5, ease: "bounce.out"}, 4)
+          .to("#text4", {
+              opacity: 1,
+              duration: 2,
+              ease: "rough({ template: none.out, strength: 1, points: 20, taper: 'none', randomize: true, clamp: false})"
+          }, 5);
+
+        // PARTICLE SYSTEM INIT
+        function initParticles() {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('particles').appendChild(renderer.domElement);
+
+            const geometry = new THREE.BufferGeometry();
+            const vertices = [];
+            for (let i = 0; i < 5000; i++) {
+                vertices.push(
+                    Math.random() * 2000 - 1000,
+                    Math.random() * 2000 - 1000,
+                    Math.random() * 2000 - 1000
+                );
+            }
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            const material = new THREE.PointsMaterial({ size: 2, color: 0x00ff00 });
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+            camera.position.z = 1000;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                particles.rotation.x += 0.001;
+                particles.rotation.y += 0.002;
+                renderer.render(scene, camera);
+            }
+            animate();
+        }
+
+        // START ANIMATIONS
+        function startAnimations() {
+            initParticles();
+            tl.play();
+            
+            // Final image sequence
+            gsap.to(".design-image", {
+                duration: 3,
+                rotation: 0,
+                scale: 1,
+                opacity: 1,
+                stagger: 0.5,
+                ease: "back.out(1.7)",
+                delay: 7
+            });
+        }
+
+        // Click to start experience
+        document.body.addEventListener('click', () => {
+            document.getElementById('dynamic-images').style.display = 'block';
+            audio.play();
+        });
+
+        // Responsive handling
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>

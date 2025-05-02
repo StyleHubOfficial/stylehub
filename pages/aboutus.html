@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Animated Background</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Setup */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; width: 100%; overflow: hidden; font-family: 'Poppins', sans-serif; }
+
+    /* Animated Gradient Background */
+    .animated-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(45deg, #ff6b6b, #5f27cd, #54a0ff, #00d2d3);
+      background-size: 900% 900%;
+      animation: gradientMove 20s ease infinite;
+      z-index: 1;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 50% 100%; }
+      50% { background-position: 100% 50%; }
+      75% { background-position: 50% 0%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Particle Overlay */
+    .particles {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 2;
+    }
+    .particles span {
+      position: absolute;
+      display: block;
+      width: 8px; height: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      50% { opacity: 0.7; }
+      100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+
+    /* Content Container */
+    .content {
+      position: relative;
+      z-index: 3;
+      width: 90%; max-width: 600px;
+      margin: 0 auto;
+      top: 50%; transform: translateY(-50%);
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      color: #fff;
+      animation: fadeIn 2s ease-out;
+    }
+    .content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      letter-spacing: 2px;
+      animation: slideInDown 1.2s ease-out;
+    }
+    .content p {
+      font-size: 1rem;
+      line-height: 1.6;
+      opacity: 0;
+      animation: slideInUp 1.2s ease-out 0.8s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9) translateY(-10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes slideInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-bg"></div>
+  <div class="particles"></div>
+
+  <div class="content">
+    <h1>Welcome to the Futuristic Realm</h1>
+    <p>
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Contact Us</title>
+            <style>
+                /* Contact Us Container */
+                .contact-container {
+                    position: relative;
+                    padding: 40px;
+                    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+                    border-radius: 15px;
+                    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3), 0 0 60px rgba(255, 0, 0, 0.5);
+                    overflow: hidden;
+                    animation: zoomIn 1.5s ease-out;
+                }
+        
+                .contact-container h1 {
+                    text-align: center;
+                    font-size: 2.5rem;
+                    margin-bottom: 20px;
+                    background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+                    background-clip: text;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    animation: textGlow 3s infinite alternate;
+                }
+        
+                .contact-details {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+        
+                .contact-details li {
+                    margin: 20px 0;
+                    font-size: 1.2rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    animation: fadeIn 2s ease;
+                }
+        
+                .contact-details li span {
+                    font-size: 1.5rem;
+                    color: #ffa500;
+                    animation: bounce 2s infinite alternate;
+                }
+        
+                /* Floating Background Effects */
+                .floating-effect {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: -1;
+                    overflow: hidden;
+                }
+        
+                .floating-effect span {
+                    position: absolute;
+                    display: block;
+                    width: 50px;
+                    height: 50px;
+                    background: rgba(255, 255, 255, 0.2);
+                    border-radius: 50%;
+                    animation: floating 20s infinite ease-in-out;
+                    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+                }
+        
+                .floating-effect span:nth-child(1) {
+                    top: 10%;
+                    left: 5%;
+                    animation-delay: 0s;
+                }
+        
+                .floating-effect span:nth-child(2) {
+                    top: 50%;
+                    left: 30%;
+                    animation-delay: 3s;
+                    width: 80px;
+                    height: 80px;
+                }
+        
+                .floating-effect span:nth-child(3) {
+                    top: 70%;
+                    left: 70%;
+                    animation-delay: 6s;
+                    width: 100px;
+                    height: 100px;
+                }
+        
+                .floating-effect span:nth-child(4) {
+                    top: 20%;
+                    left: 80%;
+                    animation-delay: 2s;
+                    width: 60px;
+                    height: 60px;
+                }
+        
+                /* Keyframes for Animations */
+                @keyframes textGlow {
+                    0% {
+                        text-shadow: 0 0 10px rgba(255, 105, 180, 0.8), 0 0 20px rgba(0, 255, 255, 0.6);
+                    }
+        
+                    100% {
+                        text-shadow: 0 0 20px rgba(255, 182, 193, 0.9), 0 0 30px rgba(0, 255, 255, 0.8);
+                    }
+                }
+        
+                @keyframes fadeIn {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+        
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+        
+                @keyframes bounce {
+                    0% {
+                        transform: translateY(0);
+                    }
+        
+                    100% {
+                        transform: translateY(-10px);
+                    }
+                }
+        
+                @keyframes zoomIn {
+                    from {
+                        transform: scale(0.8);
+                        opacity: 0;
+                    }
+        
+                    to {
+                        transform: scale(1);
+                        opacity: 1;
+                    }
+                }
+        
+                @keyframes floating {
+                    0% {
+                        transform: translateY(0) scale(1);
+                        opacity: 0.8;
+                    }
+        
+                    50% {
+                        transform: translateY(-50px) scale(1.2);
+                        opacity: 0.6;
+                    }
+        
+                    100% {
+                        transform: translateY(0) scale(1);
+                        opacity: 0.8;
+                    }
+                }
+            </style>
+        </head>
+        
+        <body>
+            <!-- Floating Background -->
+            <div class="floating-effect">
+                <span>ORDER</span>
+                <span></span>
+                <span></span>
+                <span>NOW</span>
+            </div>
+        
+            <!-- Contact Us Section -->
+            <div class="contact-container">
+                <h1>CONTACT US 👉</h1>
+                <ul class="contact-details">
+                    <li><span>📧</span>Email: <strong>Ankitbugaliya09082006</strong></li>
+                    <li><span>📱</span>Phone/WhatsApp: <strong>7414065867</strong></li>
+                    <li><span>📸</span>Instagram: <strong>@anku_bugaliya</strong></li>
+                    <li><span>💬</span>Telegram: <strong>@anku_bugaliya</strong></li>
+                    <li><span>📢</span>Telegram Channel: <strong>@anku_bugaliya</strong></li>
+                </ul>
+            </div>
+
+        </body>
+    </p>
+  </div>
+
+  <style>
+    #c {
+    font-weight: bold;
+
+    text-transform: uppercase;
+    background-image: linear-gradient(-225deg,
+            #06f5e1 0%,
+            #03f80f 29%,
+            #ff1361 67%,
+            #fff800 100%);
+    background-size: auto auto;
+    background-clip: border-box;
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textclip 2s linear infinite;
+    display: inline;
+    font-size: 20px;
+}
+
+@keyframes textclip {
+    to {
+        background-position: 200% center;
+    }
+}
+  </style>
+
+  <script>
+    // Generate floating particles
+    const particlesContainer = document.querySelector('.particles');
+    const total = 80;
+    for (let i = 0; i < total; i++) {
+      const span = document.createElement('span');
+      const size = Math.random() * 5 + 5;
+      span.style.width = `${size}px`;
+      span.style.height = `${size}px`;
+      span.style.left = `${Math.random() * 100}vw`;
+      span.style.animationDuration = `${Math.random() * 8 + 5}s`;
+      span.style.animationDelay = `${Math.random() * 5}s`;
+      particlesContainer.appendChild(span);
+    }
+  </script>
+</body>
+</html>
