@@ -1,0 +1,93 @@
+<!-- Cinematic Footer with Advanced Thriller Effects -->
+<footer class="cinematic-footer">
+    <div class="footer-content">
+      <h2 class="footer-title" data-text="✨ Designed with ❤️ by Lakshya ✨">
+        ✨ <span class="colorful-text">Designed with ❤️ by Lakshya</span> ✨
+      </h2>
+      <p class="footer-tagline">Unleashing the magic of creativity and innovation.</p>
+      <div class="footer-links">
+        <a href="https://github.com/ankusena" target="_blank" class="footer-link">🌟 GitHub</a>
+        <a href="https://twitter.com" target="_blank" class="footer-link">💬 Twitter</a>
+        <a href="https://linkedin.com" target="_blank" class="footer-link">🔗 LinkedIn</a>
+      </div>
+    </div>
+    <div class="footer-bg-animation"></div>
+  </footer>
+
+
+
+/* Glitch Effect for Footer Title */
+    .footer-title {
+      font-size: 2.8rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientGlow 6s infinite ease-in-out;
+      position: relative;
+    }
+    
+    /* Using a data attribute for glitch content */
+    .footer-title::before,
+    .footer-title::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+    
+    .footer-title::before {
+      animation: glitch-anim 2s infinite linear alternate-reverse;
+      color: #00ff00;
+    }
+    
+    .footer-title::after {
+      animation: glitch-anim2 2s infinite linear alternate-reverse;
+      color: #ff00ff;
+    }
+    
+    @keyframes glitch-anim {
+      0%   { clip: rect(42px, 9999px, 44px, 0); transform: translate(0, 0); }
+      20%  { clip: rect(5px, 9999px, 15px, 0); transform: translate(-2px, -2px); }
+      40%  { clip: rect(85px, 9999px, 90px, 0); transform: translate(2px, 2px); }
+      60%  { clip: rect(10px, 9999px, 12px, 0); transform: translate(-1px, 1px); }
+      80%  { clip: rect(60px, 9999px, 65px, 0); transform: translate(1px, -1px); }
+      100% { clip: rect(42px, 9999px, 44px, 0); transform: translate(0, 0); }
+    }
+    
+    @keyframes glitch-anim2 {
+      0%   { clip: rect(12px, 9999px, 14px, 0); transform: translate(0, 0); }
+      20%  { clip: rect(2px, 9999px, 6px, 0); transform: translate(2px, 2px); }
+      40%  { clip: rect(20px, 9999px, 21px, 0); transform: translate(-2px, -2px); }
+      60%  { clip: rect(40px, 9999px, 50px, 0); transform: translate(1px, -1px); }
+      80%  { clip: rect(30px, 9999px, 35px, 0); transform: translate(-1px, 1px); }
+      100% { clip: rect(12px, 9999px, 14px, 0); transform: translate(0, 0); }
+    }
+    
+    @keyframes gradientGlow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .colorful-text {
+      color: #ffd700;
+      animation: textColorChange 3s infinite alternate;
+    }
+    
+    @keyframes textColorChange {
+      0%   { color: #ffd700; }
+      50%  { color: #00ff00; }
+      100% { color: #ff4500; }
+    }
+
+
+
+
+In this, the star and heart is fully white
